@@ -1,0 +1,1 @@
+Using template from https://github.com/tonyelhabr/cheat-sheet-rmarkdown

@@ -1,0 +1,130 @@
+---
+title: "Linear Regression Formulas"
+output:
+  pdf_document:
+    template: template.tex
+linkcolor: black
+fontsize: 11pt
+lang: en-AU
+---
+
+
+# Linear Regression Formulas
+
+ *Linear Regression Equation* $y = \alpha + \beta x + \epsilon$  
+ 
+ 
+ *Matrix form:* $\pmb{Y} = \pmb{\beta} \pmb{X} + \pmb{\epsilon}$ 
+ 
+  with $E(Y) = \pmb{\beta} X$
+
+## Acronyms and names
+
+* *TSS*: Total Sum of Squares
+* *RSS*: Residual Sum of Squares
+* *MSS*: Mean Sum of Squares
+* $S_xx$: Corrected sum of squares of x
+* $S_yy$: Corrected sum of squares of y
+* $S_xy$: Corrected sum of products of xy
+
+## Least square estimates (matrix form)
+
+Sum of squares function
+$$
+S(\pmb{\beta}) = \sum_{i=1}^{n} y_i + X_i \pmb{\beta}
+$$
+
+### Estimates, matrix from
+
+\begin{align*}
+\widehat{\pmb{\beta}} &= (\pmb{X^TX})^{-1}\pmb{X^T Y} \\
+RSS  &= S(\widehat{\pmb{\beta}}) = \pmb{Y^TY} - \pmb{Y^TX\widehat{\beta}} \\
+\sigma^2 &= \frac{RSS}{n-p}
+\end{align*}
+
+where
+$\sigma^2$ is the *variance*.
+$n-p$ is the *degrees of freedom*.
+
+
+### Estimates, non-matrix form
+
+\begin{align*}
+S_{xx} &= \sum_{i=1}^{n} (x_i - \overline{x})^2 \\
+S_{yy} &= \sum_{i=1}^{n} (i_i - \overline{y})^2 \\
+S_{xy} &= \sum_{i=1}^{n} (x_i - \overline{x})(i_i - \overline{y})  \\
+\widehat{\beta} &= \frac{S_{xy}}{S_{xx}} \\
+\widehat{\alpha} &= \overline{y} - \frac{S_{xy}}{S{xx}}\overline{x} 
+\end{align*}
+
+## Correlation
+
+\begin{align*}
+\rho(X,Y) &= \frac{Cov(X,Y)}{\sqrt{Var(X)Var(Y)}} \\
+r &= \frac{S_{xy}}{\sqrt{S_{xx}S_{yy}}} \\
+\end{align*}
+
+## RSS,TSS, MSS
+
+\begin{align*}
+\widehat{\beta_0} &= \overline{y} \\
+then \\
+S(\widehat{\beta_0}) &= TSS
+                     &= S_{yy}
+                     &= \sum_{i=1}^{n}(y_i -\overline{y})^2
+\end{align*}
+
+\begin{align*}
+RSS &= \sum_{i=1}^{n}(y_i -\widehat{y})^2
+\end{align*}
+
+\begin{align*}
+TSS = MSS + RSS
+\end{align*}
+
+
+## $R^2$ (standard and adjusted)
+
+\begin{align*}
+R^2 &= 1 - \frac{RSS}{TSS}
+\end{align*}
+
+In the case of a *simple* linear regression (one explanatory variable) $R^2=r^2$.
+
+\begin{align*}
+R^2(adj) &= 1 - \frac{\frac{RSS}{n-p-1}}{\frac{TSS}{n-1}} \\
+R^2(adj) &= 1 - (1- R^2)\frac{n-1}{n-p-1}
+\end{align*}
+
+## Assumptions of a linear model
+
+* **A**: the deterministic part of the model captures all the non-random structure in the data.
+* **B**: the scale of the variability of the errors is constant at all values of the explanatory variables.
+* **C**: errors are independent.
+* **D**: errors are normally distributed.
+* **E**: the values of the explanatory variables are recorded without error.
+
+## Residuals
+
+\begin{align*}
+\widehat{\epsilon_i} &= y_i - \widehat(y_i)
+\end{align*}
+
+standardised residuals
+
+\begin{align*}
+r_i &= \frac{\widehat{\epsilon_i}}{\sqrt{Var(\widehat{\epsilon_i})}}
+\end{align*}
+
+## Inference for Regression Coefficients
+
+estimated standard error
+
+\begin{align*}
+e.s.e &= \sqrt{\frac{RSS}{n-p}\pmb{b}^T(\pmb{X}^T\pmb{X})^-1\pmb{b}}}
+\end{align*}
+
+\begin{align*}
+\frac{\}{}
+\end{align*}
+
