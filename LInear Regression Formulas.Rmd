@@ -72,8 +72,8 @@ r &= \frac{S_{xy}}{\sqrt{S_{xx}S_{yy}}} \\
 \begin{align*}
 \widehat{\beta_0} &= \overline{y} \\
 then \\
-S(\widehat{\beta_0}) &= TSS
-                     &= S_{yy}
+S(\widehat{\beta_0}) &= TSS \\
+                     &= S_{yy} \\
                      &= \sum_{i=1}^{n}(y_i -\overline{y})^2
 \end{align*}
 
@@ -155,7 +155,7 @@ Component&df&SS&MS&F value\\
 %Symbol&Description&Unit\\
 %\midrule
 Model       & $p-1$              & MSS            &$\frac{MSS}{p-1}$    &$\frac{\frac{MSS}{p-1}}{\frac{RSS}{n-p}}$ \\
-Residual    & $n-p$              & RSS            &$\frac{RSS}{n-p}$    &                                       \\
+Residual    & $n-p$              & RSS            &$\frac{RSS}{n-p}$    &     -                                  \\
 Total       & $n-1$              & TSS            &   -                 &     -                                 
 \end{xtabular}
 
