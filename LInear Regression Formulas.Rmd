@@ -8,7 +8,6 @@ fontsize: 11pt
 lang: en-AU
 ---
 
-
 # Linear Regression Formulas
 
  *Linear Regression Equation* $y = \alpha + \beta x + \epsilon$  
@@ -17,6 +16,8 @@ lang: en-AU
  *Matrix form:* $\pmb{Y} = \pmb{\beta} \pmb{X} + \pmb{\epsilon}$ 
  
   with $E(Y) = \pmb{\beta} X$
+  
+
 
 ## Acronyms and names
 
@@ -26,6 +27,8 @@ lang: en-AU
 * $S_xx$: Corrected sum of squares of x
 * $S_yy$: Corrected sum of squares of y
 * $S_xy$: Corrected sum of products of xy
+* *n* : number of observations
+* *p* : number of parameters (does not include intercept)
 
 ## Least square estimates (matrix form)
 
@@ -110,7 +113,7 @@ R^2(adj) &= 1 - (1- R^2)\frac{n-1}{n-p-1}
 \widehat{\epsilon_i} &= y_i - \widehat(y_i)
 \end{align*}
 
-standardised residuals
+*standardised residuals*
 
 \begin{align*}
 r_i &= \frac{\widehat{\epsilon_i}}{\sqrt{Var(\widehat{\epsilon_i})}}
@@ -118,13 +121,54 @@ r_i &= \frac{\widehat{\epsilon_i}}{\sqrt{Var(\widehat{\epsilon_i})}}
 
 ## Inference for Regression Coefficients
 
-estimated standard error
+estimated standard error (e.s.e./s.e.)
 
 \begin{align*}
-e.s.e &= \sqrt{\frac{RSS}{n-p}\pmb{b}^T(\pmb{X}^T\pmb{X})^-1\pmb{b}}}
+e.s.e.(\pmb{\widehat{\beta}})&= e.s.e(\pmb{\widehat{\beta}}) = \sqrt{\frac{RSS}{n-p}\pmb{b}^T(\pmb{X}^T\pmb{X})^{-1} \pmb{b}}
 \end{align*}
 
+
+pivotal function
+
 \begin{align*}
-\frac{\}{}
+\frac{\pmb{b}^T \pmb{\widehat{\beta}} - \pmb{b}^T \pmb{\beta}}{e.s.e(\widehat{\beta})} \sim t (n-p; \frac{1+c}{2})
 \end{align*}
+
+with $c$ : confidence level ($c=0.95 \implies (c+1)/2=0.975$)
+
+prediction interval
+
+\begin{align*}
+\pmb{b}^T\pmb{\widehat{\beta}} \pm t (n-p; \frac{1+c}{2}) e.s.e.(\pmb{\widehat{\beta}}) \\
+\pmb{b}^T\pmb{\widehat{\beta}} \pm t (n-p; \frac{1+c}{2}) \sqrt{\frac{RSS}{n-p}\pmb{b}^T(\pmb{X}^T\pmb{X})^{-1} \pmb{b}}
+\end{align*}
+
+## ANOVA table
+
+\tablehead{
+\toprule
+Component&df&SS&MS&F value\\
+\midrule
+}
+\begin{xtabular}{lllll}
+%\toprule
+%Symbol&Description&Unit\\
+%\midrule
+Model       & $p-1$              & MSS            &$\frac{MSS}{p-1}$    &$\frac{\frac{MSS}{p-1}}{\frac{RSS}{n-p}}$ \\
+Residual    & $n-p$              & RSS            &$\frac{RSS}{n-p}$    &                                       \\
+Total       & $n-1$              & TSS            &   -                 &     -                                 
+\end{xtabular}
+
+* df : degrees of freedom
+* SS : Sum of Squares
+* MS : Mean Squares
+
+F statistic ($H_0$ : all parameters = 0)
+(large F values $\implies$ rejection of $H_0$)
+
+
+
+
+
+
 
