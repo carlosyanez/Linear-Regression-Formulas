@@ -136,12 +136,122 @@ pivotal function
 
 with $c$ : confidence level ($c=0.95 \implies (c+1)/2=0.975$)
 
-prediction interval
+confidence interval (for slope parametres)
 
 \begin{align*}
 \pmb{b}^T\pmb{\widehat{\beta}} \pm t (n-p; \frac{1+c}{2}) e.s.e.(\pmb{\widehat{\beta}}) \\
-\pmb{b}^T\pmb{\widehat{\beta}} \pm t (n-p; \frac{1+c}{2}) \sqrt{\frac{RSS}{n-p}\pmb{b}^T(\pmb{X}^T\pmb{X})^{-1} \pmb{b}}
+\pmb{b}^T\pmb{\widehat{\beta}} \pm t (n-p; \frac{1+c}{2}) \sqrt{\frac{RSS}{n-p}(\pmb{b}^T(\pmb{X}^T\pmb{X})^{-1} \pmb{b})}
 \end{align*}
+
+prediction interval (for predicted variable)
+
+\begin{align*}
+\pmb{b}^T\pmb{\widehat{\beta}} \pm t (n-p; \frac{1+c}{2}) \sqrt{\frac{RSS}{n-p}(\textcolor{red}{1} + \pmb{b}^T(\pmb{X}^T\pmb{X})^{-1} \pmb{b})}
+\end{align*}
+
+
+## Different/Paralell  lines model
+\\
+model : $Y_{ij} = \alpha_i + \beta_i (x_{ij} + \overline{x}_i) + \epsilon_{ij}$ \\
+into matrix notation : $\pmb{Y} = \pmb{X}\pmb{\beta} +\pmb{epsilon}$ \\
+
+## Different lines
+
+\begin{align*}
+\pmb{Y} = \begin{pmatrix}
+           y_{11} \\
+           \vdots  \\
+           y_{1n_1} \\
+           y_{21}
+           \vdots \\
+           y_{2n_2}
+          \end{pmatrix},
+\pmb{X} = \begin{pmatrix}
+          1 & (x_{11}-\overline{x_1}) & 0 & 0 \\
+          \vdots & \vdots & \vdots & \vdots \\
+          1 & (x_{1n_1}-\overline{x_1}) & 0 & 0 \\
+          0 & 0-\overline{x}_1) & 1 &  (x_{21}-\overline{x}_2) \\
+          0 & 0-\overline{x}_1) & 1 &  (x_{2n_2}-\overline{x}_2) 
+          \end{pmatrix},
+\pmb{\beta} = \begin{pmatrix}
+              \alpha_1 \\
+              \beta_1 \\
+              \alpha_2 \\
+              \beta_2 
+              \end{pmatrix}
+\end{align*}
+
+Least squares estimate
+
+\begin{align*}
+\pmb{\widehat{\beta}} &= \begin{pmatrix}
+                        \overline{y}_1 \\
+                        \frac{S_{x_1y_1}}{S_{x_1x_1}}  \\
+                        \overline{y}_2 \\
+                        \frac{S_{x_2y_2}}{S_{x_2x_2}}  \\
+                      \end{pmatrix} \\
+RSS &= RSS1 + RSS2                      
+\end{align*}
+
+95% confidence interval for ($\beta_1 - \beta_2$)
+
+\begin{align*}
+\widehat{\beta}_1 - \widehat{\beta}_2 \pm t(n_1 + n_2 - 4; 0.975 ) \sqrt{\frac{RSS_1 + RSS_2}{n_1 + n_2 -4}(\frac{1}{S_{x_1x_2}}+\frac{1}{S_{x_1x_2}})}
+\end{align*}
+
+## Parallel lines
+
+\begin{align*}
+\pmb{Y} = \begin{pmatrix}
+           y_{11} \\
+           \vdots  \\
+           y_{1n_1} \\
+           y_{21}
+           \vdots \\
+           y_{2n_2}
+          \end{pmatrix},
+\pmb{X} = \begin{pmatrix}
+            1 & 0 & (x_{11} - \overline{x}_1) \\
+            \vdots & \vdots & \vdots \\
+            1 & 0 & (x_{1n_1} - \overline{x}_1) \\
+            0 & 1 & (x_{21} - \overline{x}_2) \\
+            \vdots & \vdots & \vdots \\
+            0 & 1 & (x_{2n_2} - \overline{x}_2)
+          \end{pmatrix},
+\pmb{\beta} =\begin{pmatrix}
+              \alpha_1 \\
+              \alpha_2 \\
+              \beta
+              \end{pmatrix}
+\end{align*}
+
+\begin{align*}
+\pmb{\widehat{\beta}} = \begin{pmatrix}
+                        \overline{y}_1 \\
+                        \overline{y}_2 \\
+                        \frac{S_{x_1y_1 + S{x_2y_2}}}{S_{x_1x_1}+S{x_2x_2}}
+                        \end{pmatrix}
+\end{align*}
+
+95% confidence interval for $\alpha_1 - \alpha_2 + \beta(\overline{x}_2 - \overline{x}_1)$
+
+\begin{align*}
+\pmb{b} = \begin{pmatrix}
+        1 \\
+       -1 \\
+      \overline{x}_2 - \overline{x}_1 
+    \end{pmatrix} \\
+\pmb{b}^T\pmb{\overline{\beta}} \pm t(n_1 + n_2 -3; 0.975) \sqrt{\frac{RSS}{n1+n2-3}\pmb{b}^T(\pmb{X}^T\pmb{X})^{-1} \pmb{b}}
+\end{align*}
+
+\begin{align*}
+(\pmb{X}^T\pmb{X})^{-1} = \begin{pmatrix}
+                          \frac{1}{n_1} & 0             & 0 \\
+                            0           & \frac{1}{n_2} & 0 \\
+                            0           & 0             & \frac{1}{S_{x_1x_1}+ S_{x_2x_2}}
+                          \end{pmatrix}
+\end{align*}
+
 
 ## ANOVA table
 
@@ -166,6 +276,12 @@ Total       & $n-1$              & TSS            &   -                 &     -
 F statistic ($H_0$ : all parameters = 0)
 (large F values $\implies$ rejection of $H_0$)
 
+
+== Difference between RSS and RSE ? 
+== expanded formulas for $\sigma^2$ ?
+== Prediction intervals vs confidence intervals
+==paralell model
+== model conversion
 
 
 
