@@ -23,6 +23,7 @@ lang: en-AU
 
 * *TSS*: Total Sum of Squares
 * *RSS*: Residual Sum of Squares
+* *RSE*: Residual Standard Error
 * *MSS*: Mean Sum of Squares
 * $S_xx$: Corrected sum of squares of x
 * $S_yy$: Corrected sum of squares of y
@@ -43,6 +44,7 @@ $$
 \widehat{\pmb{\beta}} &= (\pmb{X^TX})^{-1}\pmb{X^T Y} \\
 RSS  &= S(\widehat{\pmb{\beta}}) = \pmb{Y^TY} - \pmb{Y^TX\widehat{\beta}} \\
 \sigma^2 &= \frac{RSS}{n-p}
+RSE &=  \sigma &= \sqrt{\frac{RSS}{n-p}}
 \end{align*}
 
 where
@@ -54,8 +56,8 @@ $n-p$ is the *degrees of freedom*.
 
 \begin{align*}
 S_{xx} &= \sum_{i=1}^{n} (x_i - \overline{x})^2 \\
-S_{yy} &= \sum_{i=1}^{n} (i_i - \overline{y})^2 \\
-S_{xy} &= \sum_{i=1}^{n} (x_i - \overline{x})(i_i - \overline{y})  \\
+S_{yy} &= \sum_{i=1}^{n} (y_i - \overline{y})^2 \\
+S_{xy} &= \sum_{i=1}^{n} (x_i - \overline{x})(y_i - \overline{y})  \\
 \widehat{\beta} &= \frac{S_{xy}}{S_{xx}} \\
 \widehat{\alpha} &= \overline{y} - \frac{S_{xy}}{S{xx}}\overline{x} 
 \end{align*}
@@ -70,9 +72,9 @@ r &= \frac{S_{xy}}{\sqrt{S_{xx}S_{yy}}} \\
 ## RSS,TSS, MSS
 
 \begin{align*}
-\widehat{\beta_0} &= \overline{y} \\
+\widehat{\beta}_0 &= \overline{y} \\
 then \\
-S(\widehat{\beta_0}) &= TSS \\
+S(\widehat{\beta}_0) &= TSS \\
                      &= S_{yy} \\
                      &= \sum_{i=1}^{n}(y_i -\overline{y})^2
 \end{align*}
@@ -116,7 +118,7 @@ R^2(adj) &= 1 - (1- R^2)\frac{n-1}{n-p-1}
 *standardised residuals*
 
 \begin{align*}
-r_i &= \frac{\widehat{\epsilon_i}}{\sqrt{Var(\widehat{\epsilon_i})}}
+r_i &= \frac{\widehat{\epsilon}_i}{\sqrt{Var(\widehat{\epsilon}_i)}}
 \end{align*}
 
 ## Inference for Regression Coefficients
@@ -241,7 +243,9 @@ RSS &= RSS1 + RSS2
        -1 \\
       \overline{x}_2 - \overline{x}_1 
     \end{pmatrix} \\
-\pmb{b}^T\pmb{\overline{\beta}} \pm t(n_1 + n_2 -3; 0.975) \sqrt{\frac{RSS}{n1+n2-3}\pmb{b}^T(\pmb{X}^T\pmb{X})^{-1} \pmb{b}}
+  p = 3 \\
+\pmb{b}^T\pmb{\widehat{\beta}} \pm t(n_1 + n_2 -p; 0.975) \sqrt{\frac{RSS}{n1+n2-p}\pmb{b}^T(\pmb{X}^T\pmb{X})^{-1} \pmb{b}} \\
+\pmb{b}^T\pmb{\widehat{\beta}} \pm t(n_1 + n_2 -p; 0.975) \sqrt{\frac{RSS}{n1+n2-p}(\frac{1}{n_1} + \frac{1}{n_2}+\frac{(\overline{x}_2-\overline{x}_1)^2}{S_{x_1x_1} + S_{x_2x_2}})}
 \end{align*}
 
 \begin{align*}
@@ -252,8 +256,14 @@ RSS &= RSS1 + RSS2
                           \end{pmatrix}
 \end{align*}
 
+&nbsp;
+
+&nbsp;
 
 ## ANOVA table
+&nbsp;
+
+&nbsp;
 
 \tablehead{
 \toprule
@@ -277,11 +287,6 @@ F statistic ($H_0$ : all parameters = 0)
 (large F values $\implies$ rejection of $H_0$)
 
 
-== Difference between RSS and RSE ? 
-== expanded formulas for $\sigma^2$ ?
-== Prediction intervals vs confidence intervals
-==paralell model
-== model conversion
 
 
 
